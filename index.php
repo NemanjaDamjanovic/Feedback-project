@@ -1,50 +1,5 @@
 <?php include 'includes/header.php'; ?>
-
-<?php
-
-$name = $email = $body = '';
-$nameErr = $emailErr = $bodyErr = '';
-
-if(isset($_POST['submit'])) {
-  
-  // Validate name
-  if(empty($_POST['name'])) {
-    $nameErr = 'Name is required';
-  } else {
-    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-  }
-
-  // Validate email
-  if(empty($_POST['email'])) {
-    $emailErr = 'Email is required';
-  } else {
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-  }
-
-  // Validate body
-  if(empty($_POST['body'])) {
-    $bodyErr = 'Feedback is required';
-  } else {
-    $body = filter_input(INPUT_POST, 'body', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-  }
-
-
-if(empty($nameErr) && empty($emailErr) && empty($bodyErr)) {
-  
-  // Add to database
-  $sql = "INSERT INTO feedback (name, email, body) VALUES ('$name', '$email', '$body')";
-
-  if(mysqli_query($connect, $sql)) {
-
-    // Pass
-    header('Location: feedback.php');
-  } else {
-    echo 'Error: ' . mysqli_error($conn);
-  }
-}
-}
-
-?>
+<?php include 'includes/validate_data.php'; ?>
     
     <!-- <img src="img/logo3.png" class="w-25 mb-3" alt=""> -->
     <link rel="stylesheet" href="image_color.css">
