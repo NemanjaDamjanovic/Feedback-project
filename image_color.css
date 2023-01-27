@@ -1,0 +1,4 @@
+.color-change {
+    filter: brightness(17%) sepia(250%) saturate(10);
+}
+  
